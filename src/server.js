@@ -14,6 +14,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// db connect
 mongoose
     .connect(
         `mongodb+srv://root:${process.env.DB_PASSWORD}@cluster0.ohm7xkk.mongodb.net/pingallery-db?retryWrites=true&w=majority`
