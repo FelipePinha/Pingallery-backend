@@ -1,4 +1,6 @@
 import Express from "express";
+const app = Express();
+
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -7,8 +9,6 @@ import router from "./controllers/index.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const app = Express();
-
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,8 +16,7 @@ app.use(bodyParser.json());
 
 mongoose
     .connect(
-        `mongodb+srv://root:${process.env.DB_PASSWORD}@cluster0.ohm7xkk.mongodb.net/?retryWrites=true&w=majority`,
-        { useNewUrlParser: true, useUnifiedTopology: true }
+        `mongodb+srv://root:${process.env.DB_PASSWORD}@cluster0.ohm7xkk.mongodb.net/pingallery-db?retryWrites=true&w=majority`
     )
     .then(() => {
         console.log("conectado ao db com sucesso");
