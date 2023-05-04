@@ -2,6 +2,7 @@ import Express from "express";
 const app = Express();
 
 import bodyParser from "body-parser";
+import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
 import router from "./controllers/index.js";
@@ -13,6 +14,8 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use("/files", Express.static(path.resolve("src/upload")));
 
 // db connect
 mongoose
