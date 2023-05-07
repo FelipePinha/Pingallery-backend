@@ -16,10 +16,15 @@ router.get("/images", async (req, res) => {
 });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
-    await Images.create({
-        path: req.file.filename,
-    });
-    return res.status(201).send("imagem salva com sucesso");
+    if (req.file) {
+        await Images.create({
+            path: req.file.filename,
+        });
+
+        const images = await Images.find({}).sort({ _id: -1 });
+
+        return res.status(201).send({ msg: "imagem salva com sucesso", images });
+    }
 });
 
 export default router;
